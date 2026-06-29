@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/home-logo-img.png" type="image/png">
+    <title>Admin | Mag Garment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-login {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--cream);
+        }
+        .admin-login-box {
+            background: var(--white);
+            padding: 48px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--gold);
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+        }
+        .admin-login-box .logo {
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+        .admin-login-box h2 {
+            font-family: var(--font-display);
+            color: var(--brown);
+            margin-bottom: 8px;
+        }
+        .admin-login-box p {
+            color: var(--text-light);
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+        }
+        .admin-panel-full {
+            display: none;
+            min-height: 100vh;
+            background: var(--cream);
+        }
+        .admin-panel-full.active { display: block; }
+        .admin-header-bar {
+            background: var(--brown);
+            color: var(--cream);
+            padding: 16px 0;
+            border-bottom: 3px solid var(--gold);
+        }
+        .admin-header-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .admin-header-bar h1 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+        }
+        .admin-nav {
+            display: flex;
+            gap: 8px;
+        }
+        .admin-nav-btn {
+            padding: 8px 20px;
+            border-radius: var(--radius);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--cream);
+            background: transparent;
+        }
+        .admin-nav-btn:hover, .admin-nav-btn.active {
+            background: var(--gold);
+            color: var(--brown);
+            border-color: var(--gold);
+        }
+        .admin-main {
+            padding: 40px 0;
+        }
+        .admin-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+        .admin-card-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .admin-card-header h2 {
+            font-family: var(--font-display);
+            color: var(--brown);
+            font-size: 1.2rem;
+        }
+        .admin-card-body {
+            padding: 24px;
+        }
+        .admin-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .admin-form-grid .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        .admin-product-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .admin-product-table th,
+        .admin-product-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.85rem;
+        }
+        .admin-product-table th {
+            background: var(--cream);
+            color: var(--brown);
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .admin-product-table td {
+            color: var(--text);
+        }
+        .admin-product-table img {
+            width: 50px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--border-light);
+        }
+        .admin-action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .admin-action-btn.edit {
+            background: rgba(200, 168, 75, 0.15);
+            color: var(--gold-dark);
+        }
+        .admin-action-btn.delete {
+            background: rgba(192, 57, 43, 0.15);
+            color: var(--red);
+        }
+        .admin-action-btn:hover {
+            transform: scale(1.1);
+        }
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .admin-stat-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 24px;
+            border: 1px solid var(--border-light);
+            text-align: center;
+        }
+        .admin-stat-card h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--gold-dark);
+            margin-bottom: 4px;
+        }
+        .admin-stat-card p {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .admin-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-lighter);
+        }
+        .admin-empty i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+        .image-preview {
+            width: 100px;
+            height: 120px;
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-preview.empty::after {
+            content: '📷';
+            font-size: 1.5rem;
+            opacity: 0.3;
+        }
+        @media (max-width: 768px) {
+            .admin-form-grid { grid-template-columns: 1fr; }
+            .admin-stats { grid-template-columns: 1fr; }
+            .admin-header-bar .container { flex-direction: column; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOGIN SCREEN -->
+    <div class="admin-login" id="adminLogin">
+        <div class="admin-login-box">
+            <a href="index.html" class="logo">
+                <img src="images/home-logo-img.png" alt="Mag Garment Logo" class="logo-img">
+                <span class="logo-text">MAG <span class="accent">GARMENT</span></span>
+            </a>
+            <h2>Admin Panel</h2>
+            <p>Enter password to manage your store</p>
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                <p id="adminLoginError" style="color:var(--red);font-size:0.85rem;margin-top:12px;display:none;">Incorrect password</p>
+            </form>
+            <p style="margin-top:24px;font-size:0.8rem;color:var(--text-lighter);">Default password: mag2025</p>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL (hidden until login) -->
+    <div class="admin-panel-full" id="adminPanelFull">
+        <header class="admin-header-bar">
+            <div class="container">
+                <h1><i class="fas fa-store"></i> Mag Garment Admin</h1>
+                <div class="admin-nav">
+                    <button class="admin-nav-btn active" data-section="products">Products</button>
+                    <button class="admin-nav-btn" data-section="orders">Orders</button>
+                    <button class="admin-nav-btn" data-section="add">Add New</button>
+                    <button class="admin-nav-btn" id="adminLogout">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="admin-main">
+            <div class="container">
+                <!-- Stats -->
+                <div class="admin-stats">
+                    <div class="admin-stat-card">
+                        <h3 id="statProducts">0</h3>
+                        <p>Products</p>
+                    </div>
+                    <div class="admin-stat-card">
+                        <h3 id="statOrders">0</h3>
+                        <p>Orders</p>
+                    </div>
+                    <div class="admin-stat-card">
+                        <h3 id="statRevenue">0</h3>
+                        <p>Revenue (ETB)</p>
+                    </div>
+                </div>
+
+                <!-- Products Section -->
+                <div class="admin-section active" id="adminSectionProducts">
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h2>All Products</h2>
+                            <button class="btn btn-primary btn-sm" onclick="document.querySelector('[data-section=add]').click()">+ Add Product</button>
+                        </div>
+                        <div class="admin-card-body" style="overflow-x:auto;">
+                            <table class="admin-product-table">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Name (Amharic)</th>
+                                        <th>Category</th>
+                                        <th>Price (ETB)</th>
+                                        <th>Sizes</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminProductsTable"></tbody>
+                            </table>
+                            <div class="admin-empty" id="adminProductsEmpty" style="display:none;">
+                                <i class="fas fa-box-open"></i>
+                                <p>No products yet. Add your first product!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders Section -->
+                <div class="admin-section" id="adminSectionOrders">
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h2>Recent Orders</h2>
+                        </div>
+                        <div class="admin-card-body" style="overflow-x:auto;">
+                            <table class="admin-product-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Customer</th>
+                                        <th>Phone</th>
+                                        <th>Products (Cart)</th>
+                                        <th>Country</th>
+                                        <th>Message</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminOrdersTable"></tbody>
+                            </table>
+                            <div class="admin-empty" id="adminOrdersEmpty" style="display:none;">
+                                <i class="fas fa-inbox"></i>
+                                <p>No orders yet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Product Section -->
+                <div class="admin-section" id="adminSectionAdd">
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h2>Add New Product</h2>
+                        </div>
+                        <div class="admin-card-body">
+                            <form id="adminProductForm" class="admin-form-grid">
+                                <div class="form-group">
+                                    <label>Product Name (English) *</label>
+                                    <input type="text" id="prodName" required placeholder="e.g. Traditional Habesha Kemis">
+                                </div>
+                                <div class="form-group">
+                                    <label>Product Name (Amharic)</label>
+                                    <input type="text" id="prodNameAm" placeholder="e.g. የልዩ ቀናት ቀሚስ">
+                                </div>
+                                <div class="form-group">
+                                    <label>Price (ETB) *</label>
+                                    <input type="number" id="prodPrice" required min="0" step="0.01" placeholder="2499.99">
+                                </div>
+                                <div class="form-group">
+                                    <label>Category *</label>
+                                    <select id="prodCategory" required>
+                                        <option value="traditional">Traditional</option>
+                                        <option value="modern">Modern</option>
+                                        <option value="accessories">Accessories</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sizes (comma separated) *</label>
+                                    <input type="text" id="prodSizes" required placeholder="S, M, L, XL, XXL" value="S, M, L, XL">
+                                </div>
+                                <div class="form-group">
+                                    <label>Badge</label>
+                                    <select id="prodBadge">
+                                        <option value="">None</option>
+                                        <option value="bestseller">Bestseller</option>
+                                        <option value="new">New</option>
+                                        <option value="sale">Sale</option>
+                                        <option value="premium">Premium</option>
+                                    </select>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Description *</label>
+                                    <textarea id="prodDesc" required rows="3" placeholder="Product description..."></textarea>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Product Images</label>
+                                    <div id="imageUploadArea">
+                                        <div class="image-upload-row">
+                                            <input type="text" class="prod-image-url" placeholder="Image URL (e.g. images/product-1.png)" style="flex:1;">
+                                            <button type="button" class="btn btn-sm btn-outline" onclick="addImageField()">+ Add More</button>
+                                        </div>
+                                    </div>
+                                    <div id="imagePreviews" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;"></div>
+                                    <small style="color:var(--text-lighter);font-size:0.75rem;margin-top:8px;display:block;">
+                                        Upload images to your image/ folder and enter the path. For multiple images, click "Add More".
+                                    </small>
+                                </div>
+                                <div class="form-group full-width">
+                                    <button type="submit" class="btn btn-primary btn-block">Save Product</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Admin page specific logic
+        (function() {
+            const ADMIN_PASSWORD = 'mag2025';
+            const isAdmin = sessionStorage.getItem('mag_admin') === 'true';
+
+            if (isAdmin) {
+                document.getElementById('adminLogin').style.display = 'none';
+                document.getElementById('adminPanelFull').classList.add('active');
+                loadAdminData();
+            }
+
+            document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const pw = document.getElementById('adminPassword').value;
+                if (pw === ADMIN_PASSWORD) {
+                    sessionStorage.setItem('mag_admin', 'true');
+                    document.getElementById('adminLogin').style.display = 'none';
+                    document.getElementById('adminPanelFull').classList.add('active');
+                    loadAdminData();
+                } else {
+                    document.getElementById('adminLoginError').style.display = 'block';
+                }
+            });
+
+            document.getElementById('adminLogout').addEventListener('click', function() {
+                sessionStorage.removeItem('mag_admin');
+                location.reload();
+            });
+
+            // Nav tabs
+            document.querySelectorAll('.admin-nav-btn[data-section]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.admin-nav-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+                    const section = 'adminSection' + this.dataset.section.charAt(0).toUpperCase() + this.dataset.section.slice(1);
+                    document.getElementById(section).classList.add('active');
+                    if (this.dataset.section === 'products') loadAdminProducts();
+                    if (this.dataset.section === 'orders') loadAdminOrders();
+                });
+            });
+
+            // Product form
+            document.getElementById('adminProductForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const images = [];
+                document.querySelectorAll('.prod-image-url').forEach(input => {
+                    if (input.value.trim()) images.push(input.value.trim());
+                });
+
+                const newProduct = {
+                    id: Date.now(),
+                    name: document.getElementById('prodName').value,
+                    nameAm: document.getElementById('prodNameAm').value,
+                    price: parseFloat(document.getElementById('prodPrice').price),
+                    originalPrice: null,
+                    category: document.getElementById('prodCategory').value,
+                    description: document.getElementById('prodDesc').value,
+                    sizes: document.getElementById('prodSizes').value.split(',').map(s => s.trim()),
+                    images: images.length > 0 ? images : ['images/product-1.png'],
+                    image: images[0] || 'images/product-1.png',
+                    badge: document.getElementById('prodBadge').value || null
+                };
+
+                products.push(newProduct);
+                localStorage.setItem('mag_products', JSON.stringify(products));
+                this.reset();
+                document.getElementById('imageUploadArea').innerHTML = '<div class="image-upload-row"><input type="text" class="prod-image-url" placeholder="Image URL" style="flex:1;"><button type="button" class="btn btn-sm btn-outline" onclick="addImageField()">+ Add More</button></div>';
+                document.getElementById('imagePreviews').innerHTML = '';
+                loadAdminData();
+                if (typeof showToast === 'function') showToast('success', 'Product Added!', newProduct.name);
+            });
+        })();
+
+        function addImageField() {
+            const row = document.createElement('div');
+            row.className = 'image-upload-row';
+            row.style.marginTop = '8px';
+            row.innerHTML = '<input type="text" class="prod-image-url" placeholder="Image URL" style="flex:1;"><button type="button" class="btn btn-sm btn-outline" onclick="this.parentElement.remove()">×</button>';
+            document.getElementById('imageUploadArea').appendChild(row);
+        }
+
+        function loadAdminData() {
+            loadAdminProducts();
+            loadAdminOrders();
+            updateStats();
+        }
+
+        function updateStats() {
+            const allProducts = JSON.parse(localStorage.getItem('mag_products')) || [];
+            const allOrders = JSON.parse(localStorage.getItem('mag_orders')) || [];
+            const revenue = allOrders.reduce((sum, o) => {
+                const p = allProducts.find(p => p.name === o.product);
+                return sum + (p ? p.price : 0);
+            }, 0);
+            document.getElementById('statProducts').textContent = allProducts.length;
+            document.getElementById('statOrders').textContent = allOrders.length;
+            document.getElementById('statRevenue').textContent = revenue.toLocaleString();
+        }
+
+        function loadAdminProducts() {
+            const allProducts = JSON.parse(localStorage.getItem('mag_products')) || [];
+            const tbody = document.getElementById('adminProductsTable');
+            const empty = document.getElementById('adminProductsEmpty');
+
+            if (allProducts.length === 0) {
+                tbody.innerHTML = '';
+                empty.style.display = 'block';
+                return;
+            }
+            empty.style.display = 'none';
+            tbody.innerHTML = allProducts.map(p => `
+                <tr>
+                    <td><img src="${p.image}" alt="${p.name}" onerror="this.src='images/product-1.png'"></td>
+                    <td><strong>${p.name}</strong></td>
+                    <td class="amharic">${p.nameAm || '-'}</td>
+                    <td><span style="text-transform:capitalize">${p.category}</span></td>
+                    <td>${p.price.toLocaleString()} ETB</td>
+                    <td>${p.sizes.join(', ')}</td>
+                    <td>
+                        <button class="admin-action-btn delete" onclick="deleteAdminProduct(${p.id})"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function loadAdminOrders() {
+            const allOrders = JSON.parse(localStorage.getItem('mag_orders')) || [];
+            const tbody = document.getElementById('adminOrdersTable');
+            const empty = document.getElementById('adminOrdersEmpty');
+
+            if (allOrders.length === 0) {
+                tbody.innerHTML = '';
+                empty.style.display = 'block';
+                return;
+            }
+            empty.style.display = 'none';
+            tbody.innerHTML = allOrders.reverse().map(o => {
+                var cartItems = (o.cartItems || []).map(item =>
+                    item.name + ' (' + item.size + ') x' + item.quantity
+                ).join('<br>');
+                var statusColor = o.status === 'paid' ? 'var(--success)' : 'var(--gold-dark)';
+                return '<tr>' +
+                    '<td>' + new Date(o.date).toLocaleDateString() + '<br><small style="color:var(--text-lighter)">' + new Date(o.date).toLocaleTimeString() + '</small></td>' +
+                    '<td><strong>' + (o.name || 'N/A') + '</strong><br><small style="color:var(--text-lighter)">' + (o.email || '') + '</small></td>' +
+                    '<td>' + (o.phone || 'N/A') + '</td>' +
+                    '<td>' + (cartItems || o.product || 'N/A') + '</td>' +
+                    '<td>' + (o.country || 'N/A') + '</td>' +
+                    '<td style="font-size:0.8rem;">' + (o.message || '-') + '</td>' +
+                    '<td><span style="color:' + statusColor + ';font-weight:600;font-size:0.75rem;text-transform:uppercase;">' + (o.status || 'pending') + '</span><br><small style="color:var(--text-lighter)">' + (o.total ? o.total.toLocaleString() + ' ETB' : '') + '</small></td>' +
+                '</tr>';
+            }).join('');
+        }
+
+        function deleteAdminProduct(id) {
+            if (!confirm('Delete this product?')) return;
+            const allProducts = JSON.parse(localStorage.getItem('mag_products')) || [];
+            const filtered = allProducts.filter(p => p.id !== id);
+            localStorage.setItem('mag_products', JSON.stringify(filtered));
+            loadAdminData();
+            if (typeof showToast === 'function') showToast('error', 'Product Deleted', '');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/home-logo-img.png" type="image/png">
+    <title>Product Details | Mag Garment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="header" id="header">
+        <div class="header-inner">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="images/home-logo-img.png" alt="Mag Garment Logo" class="logo-img">
+                    <span class="logo-text">MAG <span class="accent">GARMENT</span></span>
+                </a>
+                <nav class="navbar">
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#design">Design</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="index.html#order">Order</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <button class="cart-toggle" id="cartToggle"><i class="fas fa-shopping-bag"></i><span class="cart-count" id="cartCount">0</span></button>
+                    <button class="dark-toggle" id="darkToggle"><i class="fas fa-moon"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header"><h3>Your Cart</h3><button class="cart-close" id="cartClose"><i class="fas fa-times"></i></button></div>
+        <div class="cart-items" id="cartItems"><div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Your cart is empty</p></div></div>
+        <div class="cart-footer">
+            <div class="cart-total"><span>Total:</span><span id="cartTotal">0.00 ETB</span></div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn">Proceed to Checkout</button>
+        </div>
+    </aside>
+
+    <main class="product-page">
+        <div class="container">
+            <div id="productDetail" class="product-detail-container">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+    </main>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <a href="https://wa.me/251917798081" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Mag Garment. All rights reserved.</p>
+                <p class="amharic">ሁሉም መብቶች የተጠበቁ ናቸው</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var products = JSON.parse(localStorage.getItem('mag_products')) || [];
+        if (products.length === 0) {
+            products = [
+                {id:1,name:"Traditional Habesha Kemis",nameAm:"የልዩ ቀናት ቀሚስ",category:"traditional",price:2499.99,originalPrice:2999.99,image:"images/product-1.png",images:["images/product-1.png","images/home-img-1.png","images/home-img-2.png"],badge:"bestseller",description:"Traditional habesha kemis for Meskel, Timkat, and weddings. Hand-embroidered tibeb borders on premium Ethiopian cotton.",sizes:["XS","S","M","L","XL","XXL"]},
+                {id:2,name:"Modern Ethiopian Jacket",nameAm:"ዘመናዊ ጫማ",category:"modern",price:1899.99,image:"images/product-2.png",images:["images/product-2.png","images/home-img-3.png"],badge:"new",description:"Contemporary cuts with authentic tibeb embroidery.",sizes:["S","M","L","XL"]},
+                {id:3,name:"Handwoven Netela Scarf",nameAm:"ነጠላ",category:"accessories",price:899.99,originalPrice:1199.99,image:"images/product-3.png",images:["images/product-3.png","images/home-img-1.png"],badge:"sale",description:"Traditional netela handwoven by Addis artisans.",sizes:["One Size"]},
+                {id:4,name:"Family Holiday Set",nameAm:"ለቤተሰብ",category:"traditional",price:4499.99,originalPrice:4999.99,image:"images/product-4.png",images:["images/product-4.png","images/home-img-2.png","images/home-img-3.png"],badge:"premium",description:"Matching sets for Ethiopian holidays and special occasions.",sizes:["S","M","L","XL"]},
+                {id:5,name:"Ethiopian Cotton Shawl",nameAm:"ሹል",category:"accessories",price:1499.99,image:"images/home-img-1.png",images:["images/home-img-1.png","images/product-3.png"],sizes:["One Size"]},
+                {id:6,name:"Casual Modern Blouse",nameAm:"ዘመናዊ ሹራብ",category:"modern",price:1099.99,image:"images/home-img-2.png",images:["images/home-img-2.png","images/product-4.png"],badge:"new",description:"Stylish everyday blouse with subtle Ethiopian design details.",sizes:["XS","S","M","L","XL"]},
+                {id:7,name:"Designer Embroidered Tee",nameAm:"ዲዛይነር ቲሸርት",category:"modern",price:1299.99,image:"images/home-img-3.png",images:["images/home-img-3.png","images/product-2.png"],sizes:["XS","S","M","L","XL"]},
+                {id:8,name:"Leather Sandals",nameAm:"ቆላ",category:"accessories",price:1799.99,originalPrice:2199.99,image:"images/product-2.png",images:["images/product-2.png"],badge:"sale",description:"Handcrafted leather sandals with traditional Ethiopian design elements.",sizes:["36","37","38","39","40","41","42"]}
+            ];
+        }
+
+        // Get product ID from URL
+        var params = new URLSearchParams(window.location.search);
+        var productId = parseInt(params.get('id'));
+        var product = null;
+        for (var i = 0; i < products.length; i++) {
+            if (products[i].id === productId) { product = products[i]; break; }
+        }
+
+        if (!product) {
+            document.getElementById('productDetail').innerHTML = '<div style="text-align:center;padding:80px 20px;"><h2>Product not found</h2><a href="shop.html" class="btn btn-primary" style="margin-top:24px;">Back to Shop</a></div>';
+            return;
+        }
+
+        var images = product.images || [product.image];
+        var usdPrice = (product.price / 57).toFixed(2);
+
+        var html = '<div class="product-detail-container">';
+        html += '<a href="shop.html" style="display:inline-block;margin-bottom:20px;color:var(--text-light);"><i class="fas fa-arrow-left"></i> Back to Shop</a>';
+        html += '<div class="detail-layout">';
+        html += '<div class="detail-gallery">';
+        html += '<div class="detail-main-image"><img src="' + images[0] + '" alt="' + product.name + '" id="mainDetailImage"></div>';
+        html += '<div class="detail-thumbnails">';
+        for (var j = 0; j < images.length; j++) {
+            html += '<img src="' + images[j] + '" class="detail-thumb' + (j===0?' active':'') + '" onclick="var m=document.getElementById(\'mainDetailImage\');m.src=this.src;var ts=document.querySelectorAll(\'.detail-thumb\');for(var k=0;k<ts.length;k++)ts[k].classList.remove(\'active\');this.classList.add(\'active\')">';
+        }
+        html += '</div></div>';
+        html += '<div class="detail-info">';
+        html += '<div class="product-category">' + product.category + '</div>';
+        html += '<h1>' + product.name + '</h1>';
+        if (product.nameAm) html += '<p class="amharic" style="color:var(--gold-dark);font-size:1.2rem;margin-top:4px;">' + product.nameAm + '</p>';
+        html += '<div class="product-price" style="margin:16px 0;"><span class="current" style="font-size:1.5rem;">' + product.price.toLocaleString() + ' ETB</span>';
+        if (product.originalPrice) html += '<span class="original" style="margin-left:12px;">' + product.originalPrice.toLocaleString() + ' ETB</span>';
+        html += '<span style="display:block;color:var(--text-light);margin-top:4px;">≈ ' + usdPrice + ' USD</span></div>';
+        html += '<p style="color:var(--text-light);line-height:1.8;margin:20px 0;">' + product.description + '</p>';
+
+        html += '<h4 style="margin:24px 0 8px;color:var(--brown);">Select Size</h4>';
+        html += '<div class="size-options" id="sizeOptions">';
+        for (var s = 0; s < product.sizes.length; s++) {
+            html += '<button class="size-btn' + (s===0?' active':'') + '" onclick="selectSize(this,\'' + product.sizes[s] + '\')">' + product.sizes[s] + '</button>';
+        }
+        html += '</div>';
+
+        html += '<h4 style="margin:24px 0 8px;color:var(--brown);">Quantity</h4>';
+        html += '<div class="quantity-selector"><button class="quantity-btn" onclick="changeQty(-1)">−</button><span class="quantity-value" id="qtyVal">1</span><button class="quantity-btn" onclick="changeQty(1)">+</button></div>';
+
+        html += '<div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;">';
+        html += '<button class="btn btn-primary" style="flex:1;min-width:200px;" id="addToCartBtn"><i class="fas fa-shopping-bag"></i> Add to Cart</button>';
+        html += '<a href="index.html#order" class="btn btn-gold" style="flex:1;min-width:200px;" target="_blank"><i class="fas fa-credit-card"></i> Buy Now</a>';
+        html += '</div>';
+
+        html += '<div style="margin-top:24px;padding:20px;background:var(--cream);border-radius:var(--radius);border:1px solid var(--border-light);">';
+        html += '<p style="font-size:0.9rem;color:var(--text-light);"><i class="fas fa-truck" style="color:var(--gold-dark);margin-right:8px;"></i> Free shipping on orders over 2,000 ETB</p>';
+        html += '<p style="font-size:0.9rem;color:var(--text-light);margin-top:8px;"><i class="fas fa-undo" style="color:var(--gold-dark);margin-right:8px;"></i> 30-day easy returns</p>';
+        html += '<p style="font-size:0.9rem;color:var(--text-light);margin-top:8px;"><i class="fas fa-shield-alt" style="color:var(--gold-dark);margin-right:8px;"></i> Secure payment via Chapa</p>';
+        html += '</div>';
+
+        html += '</div></div>';
+
+        document.getElementById('productDetail').innerHTML = html;
+
+        // Store current product
+        window._currentSize = product.sizes[0];
+        window._currentQty = 1;
+
+        // Add to cart handler
+        document.getElementById('addToCartBtn').onclick = function() {
+            addToCart(product.id, window._currentSize, window._currentQty);
+        };
+    });
+
+    function selectSize(btn, size) {
+        var btns = document.querySelectorAll('#sizeOptions .size-btn');
+        for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+        btn.classList.add('active');
+        window._currentSize = size;
+    }
+
+    function changeQty(delta) {
+        window._currentQty += delta;
+        if (window._currentQty < 1) window._currentQty = 1;
+        document.getElementById('qtyVal').textContent = window._currentQty;
+    }
+    </script>
+</body>
+</html>

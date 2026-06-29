@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mag Garment — Authentic Ethiopian fashion, handcrafted in Addis Ababa. Traditional habesha kemis, modern designs, worldwide shipping.">
+    <meta property="og:title" content="Mag Garment | Ethiopian Fashion">
+    <meta property="og:description" content="Handcrafted Ethiopian clothing — tibeb embroidery, habesha kemis, worldwide delivery.">
+    <link rel="icon" href="images/home-logo-img.png" type="image/png">
+    <title>Mag Garment | የኢትዮጵያ ፋሽን / Ethiopian Fashion</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-spinner"></div>
+            <span>MAG GARMENT</span>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <div class="container">
+                <a href="#" class="logo">
+                    <img src="images/home-logo-img.png" alt="Mag Garment Logo" class="logo-img">
+                    <span class="logo-text">MAG <span class="accent">GARMENT</span></span>
+                </a>
+
+                <nav class="navbar" id="navbar">
+                    <ul class="nav-links">
+                        <li><a href="#home" class="nav-link active">Home</a></li>
+                        <li><a href="#about" class="nav-link">About Us</a></li>
+                        <li><a href="#design" class="nav-link">Design</a></li>
+                        <li><a href="shop.html" class="nav-link" target="_blank">Shop</a></li>
+                        <li><a href="#order" class="nav-link">Order</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="lang-toggle" id="langToggle" aria-label="Switch Language">
+                        <span class="lang-current">EN</span>
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <button class="cart-toggle" id="cartToggle" aria-label="Shopping Cart">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                    <button class="dark-toggle" id="darkToggle" aria-label="Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close" id="cartClose"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <i class="fas fa-shopping-bag"></i>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">0.00 ETB</span>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn">Proceed to Checkout</button>
+        </div>
+    </aside>
+
+    <!-- MAIN — HOME PAGE -->
+    <main>
+        <!-- HERO -->
+        <section class="hero" id="home">
+            <div class="hero-bg" style="background-image: url('images/home-bg.jpg')"></div>
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <span class="hero-tag">New Collection 2025</span>
+                    <h1 class="hero-title">
+                        <span class="hero-amharic">የኢትዮጵያ ፋሽን</span>
+                        <span class="hero-english">Ethiopian Fashion, To The World</span>
+                    </h1>
+                    <p class="hero-subtitle">Handcrafted in Addis Ababa. Worn across the world.</p>
+                    <div class="hero-actions">
+                        <a href="shop.html" class="btn btn-primary" target="_blank">Shop Now</a>
+                        <a href="http://maggarment.rf.gd/design-editor" class="btn btn-gold">Design Yours</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slider">
+                <div class="swiper hero-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="images/home-img-1.png" alt="Ethiopian Fashion"></div>
+                        <div class="swiper-slide"><img src="images/home-img-2.png" alt="Ethiopian Fashion"></div>
+                        <div class="swiper-slide"><img src="images/home-img-3.png" alt="Ethiopian Fashion"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-scroll">
+                <a href="#about"><i class="fas fa-chevron-down"></i></a>
+            </div>
+        </section>
+
+        <!-- FEATURES BAR -->
+        <section class="features-bar">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature">
+                        <i class="fas fa-truck"></i>
+                        <div><h4>Free Shipping</h4><p>On orders over 2000 ETB</p></div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-undo"></i>
+                        <div><h4>Easy Returns</h4><p>30-day return policy</p></div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <div><h4>Secure Payment</h4><p>Chapa Pay</p></div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-headset"></i>
+                        <div><h4>24/7 Support</h4><p>WhatsApp & Telegram</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="about" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Story</span>
+                    <h2 class="section-title">Our Story <span class="amharic">| ታሪካችን</span></h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-image">
+                        <img src="images/about-img.png" alt="Mag Garment craftsmanship" loading="lazy">
+                        <div class="about-badge">
+                            <span class="badge-number">10+</span>
+                            <span class="badge-text">Years of Excellence</span>
+                        </div>
+                    </div>
+                    <div class="about-content">
+                        <p>At Mag Garment, we weave Ethiopian heritage into every thread. Our designs draw from the ancient art of tibeb — the hand-embroidered borders that have defined habesha fashion for centuries. Each piece is crafted by skilled artisans in Addis Ababa using premium Ethiopian cotton, blending tradition with contemporary style for Ethiopians everywhere.</p>
+                        <div class="about-features">
+                            <div class="about-feature">
+                                <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+                                <div><h4>Premium Ethiopian Cotton</h4><p class="amharic">ከፍተኛ ጥራት</p></div>
+                            </div>
+                            <div class="about-feature">
+                                <div class="feature-icon"><i class="fas fa-hands"></i></div>
+                                <div><h4>Tibeb Craftsmanship</h4><p class="amharic">የጥቡ ጥበብ</p></div>
+                            </div>
+                            <div class="about-feature">
+                                <div class="feature-icon"><i class="fas fa-globe-africa"></i></div>
+                                <div><h4>Worldwide Delivery</h4><p class="amharic">ዓለም አቀፍ ማድረስ</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TIBEB CULTURE -->
+        <section class="tibeb" id="tibeb">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">The Art of Tibeb</span>
+                    <h2 class="section-title">The Art of Tibeb <span class="amharic">| የጥቡ ጥበብ</span></h2>
+                </div>
+                <div class="tibeb-grid">
+                    <div class="tibeb-card">
+                        <div class="tibeb-icon"><i class="fas fa-palette"></i></div>
+                        <h3>Tibeb Weaving</h3>
+                        <p>The embroidered border on habesha kemis is not merely decoration — each pattern carries the story of its region and weaver.</p>
+                    </div>
+                    <div class="tibeb-card">
+                        <div class="tibeb-icon"><i class="fas fa-seedling"></i></div>
+                        <h3>Ethiopian Cotton</h3>
+                        <p>Ethiopia grows some of the finest cotton in the world. Our fabrics are sourced directly from local weavers.</p>
+                    </div>
+                    <div class="tibeb-card">
+                        <div class="tibeb-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <h3>Made in Addis</h3>
+                        <p>Every garment is handcrafted in Addis Ababa by artisans who have practiced this craft for generations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DESIGN CTA -->
+        <section class="design-cta" id="design">
+            <div class="container">
+                <div class="design-cta-content">
+                    <div class="design-cta-text">
+                        <span class="section-tag">Custom Design</span>
+                        <h2>Design Your Own <span class="amharic">| የራስህን ዲዛይን ስራ</span></h2>
+                        <p>Choose your fabric. Choose your tibeb pattern. We craft it in Addis and ship it to your door.</p>
+                        <ul class="design-features">
+                            <li><i class="fas fa-check"></i> Pick your pattern</li>
+                            <li><i class="fas fa-check"></i> Your measurements</li>
+                            <li><i class="fas fa-check"></i> Delivered worldwide</li>
+                        </ul>
+                        <a href="http://maggarment.rf.gd/design-editor" class="btn btn-dark btn-lg">Start Designing Now</a>
+                    </div>
+                    <div class="design-cta-image">
+                        <img src="images/design-img.png" alt="Custom design service" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Testimonials</span>
+                    <h2 class="section-title">What Our Customers Say</h2>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p>"Absolutely stunning quality! The traditional dress I ordered exceeded my expectations. The attention to detail is remarkable."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">S</div>
+                            <div><h4>Sarah T.</h4><span>Addis Ababa</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p>"The custom design service is incredible. They brought my vision to life perfectly. I've never felt more confident in an outfit!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">D</div>
+                            <div><h4>David M.</h4><span>Nairobi</span></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                        <p>"Fast shipping, beautiful packaging, and the quality is unmatched. Mag Garment has become my go-to for special occasions."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">L</div>
+                            <div><h4>Lily K.</h4><span>London</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ORDER SECTION -->
+        <section class="order" id="order">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Place an Order</span>
+                    <h2 class="section-title">Place an Order <span class="amharic">| ትዕዛዝ ስጥ</span></h2>
+                </div>
+                <div class="order-grid">
+                    <div class="order-info">
+                        <div class="order-card">
+                            <div class="order-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div><h4>Visit Us</h4><p>Bole Road, Addis Ababa<br>Ethiopia</p></div>
+                        </div>
+                        <div class="order-card">
+                            <div class="order-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div><h4>Call Us</h4><a href="tel:+251917798081">+251 917 798 081</a></div>
+                        </div>
+                        <div class="order-card">
+                            <div class="order-icon"><i class="fas fa-envelope"></i></div>
+                            <div><h4>Email Us</h4><a href="mailto:maggarment@gmail.com">maggarment@gmail.com</a></div>
+                        </div>
+                        <div class="order-card">
+                            <div class="order-icon"><i class="fab fa-whatsapp"></i></div>
+                            <div><h4>WhatsApp</h4><a href="https://wa.me/251917798081">wa.me/251917798081</a></div>
+                        </div>
+                    </div>
+                    <!-- Cart Summary (populated when checkout clicked) -->
+                    <div id="cartSummary" style="display:none;margin-bottom:24px;padding:20px;background:var(--cream);border-radius:var(--radius);border:1px solid var(--border-light);"></div>
+                    <form class="order-form" id="orderForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="orderName">Full Name</label>
+                                <input type="text" id="orderName" name="name" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="orderPhone">Phone Number</label>
+                                <input type="tel" id="orderPhone" name="phone" placeholder="+251 9XX XXX XXX" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderEmail">Email Address</label>
+                            <input type="email" id="orderEmail" name="email" placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="orderProduct">Product</label>
+                            <select id="orderProduct" name="product" required>
+                                <option value="">Select a product</option>
+                                <option value="Holiday Dress">Holiday Dress</option>
+                                <option value="Modern Ethiopian">Modern Ethiopian</option>
+                                <option value="Handwoven Scarf">Handwoven Scarf</option>
+                                <option value="Family Set">Family Set</option>
+                                <option value="Custom Design">Custom Design</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderCountry">Country</label>
+                            <select id="orderCountry" name="country" required>
+                                <option value="">Select country</option>
+                                <option value="Ethiopia">Ethiopia</option>
+                                <option value="Kenya">Kenya</option>
+                                <option value="Djibouti">Djibouti</option>
+                                <option value="Somalia">Somalia</option>
+                                <option value="USA">United States</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="Germany">Germany</option>
+                                <option value="Canada">Canada</option>
+                                <option value="Australia">Australia</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderMessage">Message / Measurements</label>
+                            <textarea id="orderMessage" name="message" rows="4" placeholder="Size, color preference, or any special requests..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <span>Send Order</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                        <div class="form-success" id="formSuccess">
+                            <i class="fas fa-check-circle"></i>
+                            <p>Thank you! We'll contact you shortly to confirm your order.</p>
+                        </div>
+                        <div class="order-whatsapp-alt">
+                            <p>Prefer WhatsApp?</p>
+                            <a href="https://wa.me/251917798081" class="btn btn-whatsapp" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <img src="images/home-logo-img.png" alt="Mag Garment Logo" class="logo-img">
+                        <span class="logo-text">MAG <span class="accent">GARMENT</span></span>
+                    </a>
+                    <p>Premium Ethiopian fashion that blends tradition with modern elegance. Crafted with love, worn with pride.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/maggarment" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com/maggarment" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://t.me/maggarment" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                        <a href="https://linkedin.com/company/maggarment" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#design">Design</a></li>
+                        <li><a href="shop.html" target="_blank">Shop</a></li>
+                        <li><a href="#order">Order</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Stay Updated</h4>
+                    <p>Subscribe for new arrivals and exclusive offers.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Mag Garment. All rights reserved.</p>
+                <p class="amharic">ሁሉም መብቶች የተጠበቁ ናቸው</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/251917798081" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

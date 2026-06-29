@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/home-logo-img.png" type="image/png">
+    <title>Shop | Mag Garment | Ethiopian Fashion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="header" id="header">
+        <div class="header-inner">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="images/home-logo-img.png" alt="Mag Garment Logo" class="logo-img">
+                    <span class="logo-text">MAG <span class="accent">GARMENT</span></span>
+                </a>
+                <nav class="navbar" id="navbar">
+                    <ul class="nav-links">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                        <li><a href="index.html#design" class="nav-link">Design</a></li>
+                        <li><a href="#" class="nav-link active">Shop</a></li>
+                        <li><a href="index.html#order" class="nav-link">Order</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <button class="cart-toggle" id="cartToggle"><i class="fas fa-shopping-bag"></i><span class="cart-count" id="cartCount">0</span></button>
+                    <button class="dark-toggle" id="darkToggle"><i class="fas fa-moon"></i></button>
+                    <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header"><h3>Your Cart</h3><button class="cart-close" id="cartClose"><i class="fas fa-times"></i></button></div>
+        <div class="cart-items" id="cartItems"><div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Your cart is empty</p></div></div>
+        <div class="cart-footer">
+            <div class="cart-total"><span>Total:</span><span id="cartTotal">0.00 ETB</span></div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn">Proceed to Checkout</button>
+        </div>
+    </aside>
+
+    <main class="shop-page">
+        <section class="shop-hero">
+            <div class="container">
+                <h1>Our Collections <span class="amharic">| የእኛ ምርቶች</span></h1>
+                <p>Discover authentic Ethiopian fashion, handcrafted in Addis Ababa</p>
+            </div>
+        </section>
+
+        <section class="shop-filter">
+            <div class="container">
+                <div class="filter-bar">
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="traditional">Traditional</button>
+                        <button class="filter-btn" data-filter="modern">Modern</button>
+                        <button class="filter-btn" data-filter="accessories">Accessories</button>
+                    </div>
+                    <div class="sort-select">
+                        <select id="sortSelect">
+                            <option value="default">Sort by: Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="name">Name: A-Z</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="shop-products">
+            <div class="container">
+                <div class="product-grid" id="productGrid"></div>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <a href="https://wa.me/251917798081" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Mag Garment. All rights reserved.</p>
+                <p class="amharic">ሁሉም መብቶች የተጠበቁ ናቸው</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+    // Shop page - all logic inline to avoid conflicts
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get products from localStorage
+        var products = JSON.parse(localStorage.getItem('mag_products')) || [];
+        if (products.length === 0) {
+            // Default products
+            products = [
+                {id:1,name:"Traditional Habesha Kemis",nameAm:"የልዩ ቀናት ቀሚስ",category:"traditional",price:2499.99,originalPrice:2999.99,image:"images/product-1.png",images:["images/product-1.png","images/home-img-1.png","images/home-img-2.png"],badge:"bestseller",description:"Traditional habesha kemis for Meskel, Timkat, and weddings.",sizes:["XS","S","M","L","XL","XXL"]},
+                {id:2,name:"Modern Ethiopian Jacket",nameAm:"ዘመናዊ ጫማ",category:"modern",price:1899.99,image:"images/product-2.png",images:["images/product-2.png","images/home-img-3.png"],badge:"new",description:"Contemporary cuts with authentic tibeb embroidery.",sizes:["S","M","L","XL"]},
+                {id:3,name:"Handwoven Netela Scarf",nameAm:"ነጠላ",category:"accessories",price:899.99,originalPrice:1199.99,image:"images/product-3.png",images:["images/product-3.png","images/home-img-1.png"],badge:"sale",description:"Traditional netela handwoven by Addis artisans.",sizes:["One Size"]},
+                {id:4,name:"Family Holiday Set",nameAm:"ለቤተሰብ",category:"traditional",price:4499.99,originalPrice:4999.99,image:"images/product-4.png",images:["images/product-4.png","images/home-img-2.png","images/home-img-3.png"],badge:"premium",description:"Matching sets for Ethiopian holidays.",sizes:["S","M","L","XL"]},
+                {id:5,name:"Ethiopian Cotton Shawl",nameAm:"ሹል",category:"accessories",price:1499.99,image:"images/home-img-1.png",images:["images/home-img-1.png","images/product-3.png"],sizes:["One Size"]},
+                {id:6,name:"Casual Modern Blouse",nameAm:"ዘመናዊ ሹራብ",category:"modern",price:1099.99,image:"images/home-img-2.png",images:["images/home-img-2.png","images/product-4.png"],badge:"new",description:"Stylish everyday blouse with Ethiopian details.",sizes:["XS","S","M","L","XL"]},
+                {id:7,name:"Designer Embroidered Tee",nameAm:"ዲዛይነር ቲሸርት",category:"modern",price:1299.99,image:"images/home-img-3.png",images:["images/home-img-3.png","images/product-2.png"],sizes:["XS","S","M","L","XL"]},
+                {id:8,name:"Leather Sandals",nameAm:"ቆላ",category:"accessories",price:1799.99,originalPrice:2199.99,image:"images/product-2.png",images:["images/product-2.png"],badge:"sale",description:"Handcrafted leather sandals with Ethiopian design.",sizes:["36","37","38","39","40","41","42"]}
+            ];
+        }
+
+        var grid = document.getElementById('productGrid');
+        var filterBtns = document.querySelectorAll('.filter-btn');
+        var sortSelect = document.getElementById('sortSelect');
+        var currentFilter = 'all';
+        var currentSort = 'default';
+
+        function renderProducts() {
+            var filtered = products.slice();
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(function(p) { return p.category === currentFilter; });
+            }
+            switch(currentSort) {
+                case 'price-low': filtered.sort(function(a,b){return a.price-b.price}); break;
+                case 'price-high': filtered.sort(function(a,b){return b.price-a.price}); break;
+                case 'name': filtered.sort(function(a,b){return a.name.localeCompare(b.name)}); break;
+            }
+
+            grid.innerHTML = filtered.map(function(p) {
+                return '<article class="product-card" data-id="' + p.id + '">' +
+                    '<div class="product-image"><img src="' + p.image + '" alt="' + p.name + '" loading="lazy">' +
+                    (p.badge ? '<span class="product-badge ' + (p.badge==='sale'?'sale':p.badge==='new'?'new':'') + '">' + p.badge + '</span>' : '') +
+                    '</div>' +
+                    '<div class="product-info">' +
+                    '<div class="product-category">' + p.category + '</div>' +
+                    '<h3 class="product-name">' + p.name + '</h3>' +
+                    '<div class="product-price"><span class="current">' + p.price.toLocaleString() + ' ETB</span>' +
+                    (p.originalPrice ? '<span class="original">' + p.originalPrice.toLocaleString() + ' ETB</span>' : '') +
+                    '</div>' +
+                    '<a href="product.html?id=' + p.id + '" class="btn btn-sm btn-outline" target="_blank" style="margin-top:12px;">View Details & Order</a>' +
+                    '</div></article>';
+            }).join('');
+        }
+
+        // Filter buttons
+        filterBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(function(b){b.classList.remove('active')});
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                renderProducts();
+            });
+        });
+
+        // Sort
+        sortSelect.addEventListener('change', function() {
+            currentSort = this.value;
+            renderProducts();
+        });
+
+        // Initial render
+        renderProducts();
+    });
+    </script>
+</body>
+</html>
