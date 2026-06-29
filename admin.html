@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="config.js"></script>
     <style>
         .admin-login {
             min-height: 100vh;
@@ -419,7 +420,7 @@
     <script>
         // Admin page specific logic
         (function() {
-            const ADMIN_PASSWORD = 'mag2025';
+            const ADMIN_PASSWORD = (typeof CONFIG !== 'undefined' && CONFIG.ADMIN_PASSWORD) ? CONFIG.ADMIN_PASSWORD : 'mag2025';
             const isAdmin = sessionStorage.getItem('mag_admin') === 'true';
 
             if (isAdmin) {

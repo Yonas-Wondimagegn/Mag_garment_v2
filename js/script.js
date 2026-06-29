@@ -1,7 +1,30 @@
 /**
  * MAG GARMENT V2 — Ethiopian Fashion
  * Handcrafted in Addis Ababa
+ * 
+ * SETUP: Copy config.example.js to config.js and add your Chapa API key
  */
+
+// Load config (define defaults if config.js is missing)
+var CONFIG = {
+    CHAPA_SECRET_KEY: 'YOUR_CHAPA_SECRET_KEY',
+    CHAPA_PUBLIC_KEY: '',
+    CHAPA_API_URL: 'https://api.chapa.co/v1/transaction/initialize',
+    CHAPA_VERIFY_URL: 'https://api.chapa.co/v1/transaction/verify/',
+    ADMIN_PASSWORD: 'mag2025',
+    BUSINESS_NAME: 'Mag Garment',
+    BUSINESS_EMAIL: 'maggarment@gmail.com',
+    BUSINESS_PHONE: '+251917798081',
+    WHATSAPP_LINK: 'https://wa.me/251917798081',
+    CURRENCY: 'ETB',
+    USD_RATE: 57,
+    FREE_SHIPPING_THRESHOLD: 2000
+};
+try {
+    if (typeof window !== 'undefined' && window.CONFIG) {
+        CONFIG = Object.assign(CONFIG, window.CONFIG);
+    }
+} catch(e) { /* use defaults */ }
 
 // ============================================
 // PRODUCT DATA
@@ -364,11 +387,11 @@ function initiateChapaPayment(total, items, txRef, orderData) {
     // To activate Chapa:
     // 1. Sign up at https://chapa.co
     // 2. Get your API key from the dashboard
-    // 3. Replace YOUR_CHAPA_SECRET_KEY below
-    // 4. Set up webhook for payment verification
+    // 3. Copy config.example.js → config.js
+    // 4. Add your CHAPA_SECRET_KEY to config.js
 
-    const CHAPA_SECRET_KEY = 'YOUR_CHAPA_SECRET_KEY'; // Replace with your key
-    const CHAPA_API_URL = 'https://api.chapa.co/v1/transaction/initialize';
+    const CHAPA_SECRET_KEY = CONFIG.CHAPA_SECRET_KEY;
+    const CHAPA_API_URL = CONFIG.CHAPA_API_URL;
 
     // Show payment modal
     showChapaPaymentModal(total, items, orderData);
@@ -391,7 +414,7 @@ function initiateChapaPayment(total, items, txRef, orderData) {
             callback_url: window.location.origin + '/verify.html',
             return_url: window.location.origin + '/success.html',
             customization: {
-                title: 'Mag Garment',
+                title: CONFIG.BUSINESS_NAME,
                 description: 'Ethiopian Fashion Order'
             }
         })
