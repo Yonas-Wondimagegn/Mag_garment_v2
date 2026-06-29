@@ -41,7 +41,6 @@
                         <li><a href="#about" class="nav-link">About Us</a></li>
                         <li><a href="#design" class="nav-link">Design</a></li>
                         <li><a href="shop.html" class="nav-link" target="_blank">Shop</a></li>
-                        <li><a href="#order" class="nav-link">Order</a></li>
                     </ul>
                 </nav>
 
@@ -88,6 +87,14 @@
             <button class="btn btn-primary btn-block" id="checkoutBtn">Proceed to Checkout</button>
         </div>
     </aside>
+
+    <!-- ORDER FORM MODAL (after cart) -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="order-modal">
+            <button class="modal-close" id="orderModalClose"><i class="fas fa-times"></i></button>
+            <div id="orderModalContent"></div>
+        </div>
+    </div>
 
     <!-- MAIN — HOME PAGE -->
     <main>
@@ -267,99 +274,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- ORDER SECTION -->
-        <section class="order" id="order">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">Place an Order</span>
-                    <h2 class="section-title">Place an Order <span class="amharic">| ትዕዛዝ ስጥ</span></h2>
-                </div>
-                <div class="order-grid">
-                    <div class="order-info">
-                        <div class="order-card">
-                            <div class="order-icon"><i class="fas fa-map-marker-alt"></i></div>
-                            <div><h4>Visit Us</h4><p>Bole Road, Addis Ababa<br>Ethiopia</p></div>
-                        </div>
-                        <div class="order-card">
-                            <div class="order-icon"><i class="fas fa-phone-alt"></i></div>
-                            <div><h4>Call Us</h4><a href="tel:+251917798081">+251 917 798 081</a></div>
-                        </div>
-                        <div class="order-card">
-                            <div class="order-icon"><i class="fas fa-envelope"></i></div>
-                            <div><h4>Email Us</h4><a href="mailto:maggarment@gmail.com">maggarment@gmail.com</a></div>
-                        </div>
-                        <div class="order-card">
-                            <div class="order-icon"><i class="fab fa-whatsapp"></i></div>
-                            <div><h4>WhatsApp</h4><a href="https://wa.me/251917798081">wa.me/251917798081</a></div>
-                        </div>
-                    </div>
-                    <!-- Cart Summary (populated when checkout clicked) -->
-                    <div id="cartSummary" style="display:none;margin-bottom:24px;padding:20px;background:var(--cream);border-radius:var(--radius);border:1px solid var(--border-light);"></div>
-                    <form class="order-form" id="orderForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="orderName">Full Name</label>
-                                <input type="text" id="orderName" name="name" placeholder="Your name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="orderPhone">Phone Number</label>
-                                <input type="tel" id="orderPhone" name="phone" placeholder="+251 9XX XXX XXX" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="orderEmail">Email Address</label>
-                            <input type="email" id="orderEmail" name="email" placeholder="your@email.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="orderProduct">Product</label>
-                            <select id="orderProduct" name="product" required>
-                                <option value="">Select a product</option>
-                                <option value="Holiday Dress">Holiday Dress</option>
-                                <option value="Modern Ethiopian">Modern Ethiopian</option>
-                                <option value="Handwoven Scarf">Handwoven Scarf</option>
-                                <option value="Family Set">Family Set</option>
-                                <option value="Custom Design">Custom Design</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="orderCountry">Country</label>
-                            <select id="orderCountry" name="country" required>
-                                <option value="">Select country</option>
-                                <option value="Ethiopia">Ethiopia</option>
-                                <option value="Kenya">Kenya</option>
-                                <option value="Djibouti">Djibouti</option>
-                                <option value="Somalia">Somalia</option>
-                                <option value="USA">United States</option>
-                                <option value="UK">United Kingdom</option>
-                                <option value="Germany">Germany</option>
-                                <option value="Canada">Canada</option>
-                                <option value="Australia">Australia</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="orderMessage">Message / Measurements</label>
-                            <textarea id="orderMessage" name="message" rows="4" placeholder="Size, color preference, or any special requests..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">
-                            <span>Send Order</span>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                        <div class="form-success" id="formSuccess">
-                            <i class="fas fa-check-circle"></i>
-                            <p>Thank you! We'll contact you shortly to confirm your order.</p>
-                        </div>
-                        <div class="order-whatsapp-alt">
-                            <p>Prefer WhatsApp?</p>
-                            <a href="https://wa.me/251917798081" class="btn btn-whatsapp" target="_blank">
-                                <i class="fab fa-whatsapp"></i> WhatsApp
-                            </a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- FOOTER -->
@@ -386,7 +300,6 @@
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#design">Design</a></li>
                         <li><a href="shop.html" target="_blank">Shop</a></li>
-                        <li><a href="#order">Order</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">

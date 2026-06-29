@@ -131,7 +131,7 @@
 
         html += '<div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;">';
         html += '<button class="btn btn-primary" style="flex:1;min-width:200px;" id="addToCartBtn"><i class="fas fa-shopping-bag"></i> Add to Cart</button>';
-        html += '<a href="index.html#order" class="btn btn-gold" style="flex:1;min-width:200px;" target="_blank"><i class="fas fa-credit-card"></i> Buy Now</a>';
+        html += '<button class="btn btn-gold" style="flex:1;min-width:200px;" id="buyNowBtn"><i class="fas fa-credit-card"></i> Buy Now</button>';
         html += '</div>';
 
         html += '<div style="margin-top:24px;padding:20px;background:var(--cream);border-radius:var(--radius);border:1px solid var(--border-light);">';
@@ -151,6 +151,12 @@
         // Add to cart handler
         document.getElementById('addToCartBtn').onclick = function() {
             addToCart(product.id, window._currentSize, window._currentQty);
+        };
+
+        // Buy Now handler - add to cart and redirect to home cart
+        document.getElementById('buyNowBtn').onclick = function() {
+            addToCart(product.id, window._currentSize, window._currentQty);
+            window.location.href = 'index.html';
         };
     });
 

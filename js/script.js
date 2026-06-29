@@ -232,13 +232,26 @@ function initCart() {
                 showToast('error', 'Cart Empty', 'Add products to cart first');
                 return;
             }
-            // Go to order form (scroll to order section)
+            // Close cart and show order form modal
             closeCart();
-            const orderSection = document.getElementById('order');
-            if (orderSection) {
-                orderSection.scrollIntoView({ behavior: 'smooth' });
-                // Show cart summary in order form
-                showCartSummaryInOrder();
+            showOrderFormModal();
+        });
+    }
+
+    // Close order modal
+    var orderModalClose = document.getElementById('orderModalClose');
+    var orderModal = document.getElementById('orderModal');
+    if (orderModalClose) {
+        orderModalClose.addEventListener('click', function() {
+            orderModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+    if (orderModal) {
+        orderModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+                document.body.style.overflow = '';
             }
         });
     }
@@ -747,58 +760,107 @@ function showToast(type, title, message) {
 }
 
 // ============================================
-// ORDER FORM (on index.html) - Cart → Order → Chapa
+// ORDER FORM MODAL (after cart approval)
 // ============================================
-if (elements.orderForm) {
-    elements.orderForm.addEventListener('submit', function(e) {
+function showOrderFormModal() {
+    var modal = document.getElementById('orderModal');
+    var content = document.getElementById('orderModalContent');
+    if (!modal || !content) return;
+    var total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    content.innerHTML = `
+        <h2 style="font-family:var(--font-display);color:var(--brown);margin-bottom:20px;">Place Your Order</h2>
+        <div style="background:var(--cream);border-radius:var(--radius);padding:16px;margin-bottom:24px;">
+            <h4 style="margin-bottom:12px;color:var(--brown);">Order Summary (${cart.length} items)</h4>
+            ${cart.map(item => `
+                <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:0.9rem;border-bottom:1px solid var(--border-light);">
+                    <span>${item.name} (${item.size}) x${item.quantity}</span>
+                    <span style="font-weight:600">${(item.price * item.quantity).toLocaleString()} ETB</span>
+                </div>
+            `).join('')}
+            <div style="display:flex;justify-content:space-between;padding:12px 0 0;font-weight:700;font-size:1.1rem;color:var(--brown);">
+                <span>Total</span>
+                <span>${total.toLocaleString()} ETB</span>
+            </div>
+        </div>
+        <form id="orderFormModal">
+            <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="orderName" name="name" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="orderPhone" name="phone" placeholder="+251 9XX XXX XXX" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="orderEmail" name="email" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+                <label>Country *</label>
+                <select id="orderCountry" name="country" required>
+                    <option value="">Select country</option>
+                    <option value="Ethiopia">Ethiopia</option>
+                    <option value="Kenya">Kenya</option>
+                    <option value="Djibouti">Djibouti</option>
+                    <option value="Somalia">Somalia</option>
+                    <option value="USA">United States</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Message / Measurements</label>
+                <textarea id="orderMessage" name="message" rows="3" placeholder="Size, color preference, or any special requests..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+                <span>Place Order & Pay with Chapa</span>
+                <i class="fas fa-lock"></i>
+            </button>
+        </form>
+        <div class="form-success" id="formSuccessModal" style="display:none;margin-top:16px;">
+            <i class="fas fa-check-circle" style="font-size:2rem;color:var(--success);"></i>
+            <p style="color:var(--success);font-weight:600;margin-top:8px;">Order placed! Redirecting to payment...</p>
+        </div>
+    `;
+
+    // Handle form submission
+    var form = document.getElementById('orderFormModal');
+    form.onsubmit = function(e) {
         e.preventDefault();
-        if (cart.length === 0) {
-            showToast('error', 'Cart Empty', 'Add products to cart first');
-            return;
-        }
-        const formData = new FormData(this);
-        const data = Object.fromEntries(formData.entries());
+        var formData = new FormData(form);
+        var data = Object.fromEntries(formData.entries());
         data.date = new Date().toISOString();
         data.cartItems = cart;
-        data.total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        data.total = total;
         data.status = 'pending_payment';
         data.tx_ref = 'mag_' + Date.now();
 
-        // Save order to localStorage for admin
-        const orders = JSON.parse(localStorage.getItem('mag_orders')) || [];
+        // Save order for admin
+        var orders = JSON.parse(localStorage.getItem('mag_orders')) || [];
         orders.push(data);
         localStorage.setItem('mag_orders', JSON.stringify(orders));
 
-        // Show success and redirect to Chapa
-        if (elements.formSuccess) elements.formSuccess.classList.add('show');
+        // Show success
+        document.getElementById('formSuccessModal').style.display = 'block';
         showToast('success', 'Order Placed!', 'Redirecting to Chapa payment...');
 
-        // Initiate Chapa payment
-        setTimeout(() => {
-            initiateChapaPayment(data.total, cart, data.tx_ref, data);
+        // Clear cart and redirect to Chapa
+        setTimeout(function() {
+            cart = [];
+            saveCart();
+            updateCart();
+            initiateChapaPayment(total, cart, data.tx_ref, data);
         }, 1500);
-    });
-}
+    };
 
-// Show cart summary in order form
-function showCartSummaryInOrder() {
-    const summaryEl = document.getElementById('cartSummary');
-    if (!summaryEl || cart.length === 0) return;
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    summaryEl.innerHTML = `
-        <h4 style="margin-bottom:12px;color:var(--brown);"><i class="fas fa-shopping-bag"></i> Your Order (${cart.length} items)</h4>
-        ${cart.map(item => `
-            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border-light);">
-                <span>${item.name} (${item.size}) x${item.quantity}</span>
-                <span style="font-weight:600">${(item.price * item.quantity).toLocaleString()} ETB</span>
-            </div>
-        `).join('')}
-        <div style="display:flex;justify-content:space-between;padding:12px 0;font-weight:700;font-size:1.1rem;color:var(--brown);">
-            <span>Total</span>
-            <span>${total.toLocaleString()} ETB</span>
-        </div>
-    `;
-    summaryEl.style.display = 'block';
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
 
 // ============================================
