@@ -1,6 +1,6 @@
-# Mag Garment V2 🇪🇹
+# Mag Garment V2 
 
-Ethiopian fashion e-commerce website - Handcrafted in Addis Ababa, worn across the world.
+Ethiopian fashion ecommerce website - handcrafted in Addis Ababa worn across the world
 
 ## Quick Start
 
@@ -67,17 +67,17 @@ const CONFIG = {
 
 ## Features
 
-- 🛒 Shopping cart with persistent storage
-- 💳 Chapa payment integration (ETB)
-- 📱 Responsive design
-- 🌙 Dark mode toggle
-- 🌍 Bilingual (English/Amharic)
-- 👤 Admin panel for product & order management
-- 📦 Order tracking
-- 💬 WhatsApp integration
+- Shopping cart with persistent storage
+- Chapa payment integration
+- Responsive design
+- Dark mode toggle
+- Bilingual (English/Amharic)
+- Admin panel for product & order management
+- Order tracking
+- WhatsApp integration
 
 ## Security
 
-**Never commit `config.js` to version control!**
+**Never commit `config.js` to version control**
 
-All sensitive keys are stored in `config.js` which is included in `.gitignore`.
+All sensitive keys are stored in `config.js` which is included in `.gitignore`
